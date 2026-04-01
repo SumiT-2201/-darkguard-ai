@@ -8,42 +8,56 @@ class RuleDetector:
         "settings", "profile", "logout", "contact", "about", "help", "terms",
         "privacy", "cookies", "dashboard", "notifications", "messages",
         "create account", "forgot password", "reset password", "language",
-        "search results", "back to top", "read more", "view all"
+        "search results", "back to top", "read more", "view all", "copyright",
+        "all rights reserved", "powered by", "facebook", "twitter", "instagram",
+        "linkedin", "youtube", "social media", "site map", "go to top"
     ]
 
-    # 2. Dictionary of Text-based Regex Rules Enhanced for broader detection
+    # 2. Dictionary of Text-based Regex Rules: Refined for STRONGER persuasive language
     TEXT_RULES = {
         "urgency": {
             "patterns": [
-                r"only \d+ left", r"limited time", r"expires soon",
-                r"deal ends", r"last chance", r"sale ends today", r"seconds to", 
-                r"don't miss out", r"hurry up", r"fast-selling"
+                r"only \d+ items? left in stock", 
+                r"limited time offer expires soon",
+                r"hurry up! deal ends in \d+ minutes", 
+                r"act now and save",
+                r"last chance to grab this deal",
+                r"one-time offer",
+                r"seconds to go before price increases"
             ],
             "severity": "high",
             "explanation": "Artificial time limits put unfair psychological pressure on you to make a hasty decision."
         },
         "scarcity": {
             "patterns": [
-                r"low stock", r"\d+ people have this in their cart", r"only few left",
-                r"stock is low", r"while supplies last", r"limited edition", r"demand is high",
-                r"popular item", r"almost gone"
+                r"\d+ people have this in their cart right now",
+                r"low stock - almost sold out",
+                r"only few items left at this price",
+                r"high demand - while supplies last",
+                r"limited edition item",
+                r"join \d+ others waiting for this"
             ],
             "severity": "medium",
             "explanation": "Fabricated scarcity tricks you into thinking a product is more valuable or popular than it is."
         },
         "pressure": {
             "patterns": [
-                r"buy now", r"continue to proceed", r"agree to receive", r"don't wait",
-                r"checkout now", r"add to cart immediately", r"unlock special offer",
-                r"grab yours", r"don't let it slip"
+                r"buy now and get a bonus",
+                r"continue to proceed to checkout",
+                r"agree to receive promotional offers",
+                r"grab yours before it's gone",
+                r"unlock your special offer immediately",
+                r"don't let this item slip away"
             ],
             "severity": "medium",
             "explanation": "Aggressive language designed to steer you toward a specific action without consideration."
         },
         "hidden_cost": {
             "patterns": [
-                r"additional fees", r"fees may apply", r"extra charges", r"service fee",
-                r"plus handling", r"processing fee"
+                r"additional costs and fees will be added",
+                r"service fees and taxes not included",
+                r"extra charges added at checkout",
+                r"processing fee of \d+ will be applied"
             ],
             "severity": "critical",
             "explanation": "Costs are hidden until the last moment, making the initial price look more attractive."
@@ -62,13 +76,16 @@ class RuleDetector:
                 for match in re.finditer(pattern, text_lower, re.IGNORECASE):
                     matched_text = match.group(0)
                     matched_lower = matched_text.lower().strip()
+                    word_count = len(matched_lower.split())
                     
-                    # FALSE POSITIVE FILTER: Check against exclusion list
+                    # FALSE POSITIVE FILTERS
+                    # A. Exclusion list check
                     if matched_lower in RuleDetector.EXCLUSION_LIST:
                         continue
                         
-                    # Contextual Filter: If the "matched text" is just a common UI word in isolation
-                    if len(matched_lower.split()) < 2 and matched_lower in RuleDetector.EXCLUSION_LIST:
+                    # B. Minimum Phrase Length (>5 words) as requested
+                    # Only apply to general pattern matches, not extremely specific ones
+                    if word_count <= 5 and matched_lower not in ["only 1 left", "low stock"]:
                         continue
                     
                     # Deduplicate exact text matches
@@ -89,7 +106,7 @@ class RuleDetector:
         if html_content:
             soup = BeautifulSoup(html_content, 'html.parser')
             
-            # Detect Pre-selected Checkboxes (Opt-out rather than Opt-in)
+            # Detect Pre-selected Checkboxes
             checkboxes = soup.find_all('input', type='checkbox', checked=True)
             for box in checkboxes:
                 label = ""

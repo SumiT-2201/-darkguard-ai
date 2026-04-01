@@ -14,7 +14,8 @@ class MLDetector:
         "login", "sign up", "forgot password", "new chat", "search for anything",
         "menu bar", "home page", "back to previous", "create an account",
         "accept and continue", "view profile", "privacy policy", "terms of use",
-        "help center", "contact us", "all rights reserved"
+        "help center", "contact us", "all rights reserved", "powered by", "copyright",
+        "all items", "see more", "read more", "view all", "stay informed", "visit home"
     ]
 
     @classmethod
@@ -63,12 +64,19 @@ class MLDetector:
             if cls.label_encoder is not None:
                 category = cls.label_encoder.inverse_transform([pred])[0]
             
-            # FALSE POSITIVE FILTER: Skip harmless UI phrases
+            # FALSE POSITIVE FILTERS:
             sent_lower = sentence.lower().strip()
+            word_count = len(sent_lower.split())
+            
+            # A. Exclusion list check
             if any(exc in sent_lower for exc in cls.EXCLUSION_LIST):
                 continue
             
-            # USE IMPROVED THRESHOLD (0.8 as requested)
+            # B. NEW MINIMUM PHRASE LENGTH (>5 words)
+            if word_count <= 5:
+                continue
+            
+            # C. USE IMPROVED 0.8 THRESHOLD
             if category.lower() in ['not_dark_pattern', 'none', 'safe'] or max_prob < 0.8:
                 continue
             

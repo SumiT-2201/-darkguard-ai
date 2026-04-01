@@ -1,0 +1,42 @@
+{
+    "Total Samples": 206,
+    "True Positives (TP)": 153,
+    "True Negatives (TN)": 46,
+    "False Positives (FP)": 0,
+    "False Negatives (FN)": 7,
+    "Precision": 1.0,
+    "Recall": 0.9563,
+    "FP_Cases": [],
+    "FN_Cases": [
+        {
+            "text": "Sign up for our newsletter to view this article.",
+            "actual": "forced_action",
+            "conf": 0.59,
+            "pred": "forced_action"
+        },
+        {
+            "text": "Follow us on Instagram to enter the giveaway.",
+            "actual": "forced_action",
+            "conf": 0.65,
+            "pred": "forced_action"
+        },
+        {
+            "text": "You must agree to our terms and conditions to read the blog.",
+            "actual": "forced_action",
+            "conf": 0.65,
+            "pred": "forced_action"
+        },
+        {
+            "text": "Subscribe to notifications to close this popup.",
+            "actual": "forced_action",
+            "conf": 0.69,
+            "pred": "forced_action"
+        },
+        {
+            "text": "To unsubscribe, please call our customer service line.",
+            "actual": "forced_action",
+            "conf": 0.65,
+            "pred": "forced_action"
+        }
+    ]
+}

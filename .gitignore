@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+
+# Models & Data (if bulky/local)
+# backend/app/ml/trained_model/*.joblib
+
+# JS/Node
+node_modules/
+dist/
+.DS_Store
+
+# Logs
+*.log
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+.gemini/

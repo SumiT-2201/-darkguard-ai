@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkGuard ML Extension</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --secondary: #12121c;
+            --accent: #6c5ce7;
+            --text: #e2e2ec;
+            --text-dim: #9494aa;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+        }
+
+        body {
+            width: 320px;
+            margin: 0;
+            padding: 1rem;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.75rem;
+        }
+
+        .logo { font-size: 1.5rem; }
+        .title { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; }
+
+        .scan-action {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        #scan-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        #scan-btn:hover { background: #5a4bcf; }
+        #scan-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .spinner {
+            width: 24px; height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 0.75rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .result-card {
+            display: none;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.25rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .score-val { font-size: 1.75rem; font-weight: 800; }
+        .risk-label { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+        .findings-box {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.75rem;
+            border-radius: 6px;
+        }
+
+        .error {
+            display: none;
+            background: rgba(214, 48, 49, 0.1);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .footer {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="logo">🛡️</span>
+            <span class="title">DarkGuard ML</span>
+        </div>
+
+        <div class="scan-action">
+            <button id="scan-btn">
+                <span>Scan Current Page</span>
+            </button>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <div>Analyzing AI Patterns...</div>
+        </div>
+
+        <div id="result" class="result-card">
+            <div class="score-row">
+                <div id="score" class="score-val">--</div>
+                <div id="risk" class="risk-label">Unknown</div>
+            </div>
+            <div id="findings" class="findings-box">
+                No patterns detected yet.
+            </div>
+            <div id="grade" style="margin-top: 0.75rem; font-size: 0.85rem; font-weight: 600;"></div>
+        </div>
+
+        <div id="error-msg" class="error"></div>
+
+        <div class="footer">
+            Powered by Hybrid AI Engine v1.0
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkGuard ML — AI Dark Pattern Detector</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+    </div>
+    <div class="bg-grid"></div>
+
+    <nav class="navbar">
+        <a href="#" class="nav-brand" onclick="showView('home')">
+            <span class="nav-logo">🛡️</span>
+            <span class="nav-title">DarkGuard ML</span>
+        </a>
+        <ul class="nav-links">
+            <li><button class="nav-link active" id="nav-home" onclick="showView('home')">Scanner</button></li>
+            <li><button class="nav-link" id="nav-history" onclick="showView('history')">History</button></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Home / Scanner View -->
+        <section class="view active" id="view-home">
+            <div class="hero">
+                <div class="hero-badge">AI-Powered Detection Engine</div>
+                <h1>Detect <span class="gradient">Dark Patterns</span> In Any Website</h1>
+                <p>Scan any URL to uncover deceptive UI/UX patterns using our hybrid AI engine combining rule-based heuristics and Natural Language Processing.</p>
+                
+                <div class="scan-box">
+                    <span class="scan-icon">🔗</span>
+                    <input type="url" id="url-input" class="scan-input" placeholder="Enter website URL (e.g., example.com)" autocomplete="off">
+                    <button id="scan-btn" class="scan-btn" onclick="startScan()">
+                        <span class="btn-text">Scan Now</span>
+                    </button>
+                </div>
+                
+                <div id="scan-progress" class="hidden">
+                    <div class="progress-spinner"></div>
+                    <div>Analyzing website... please wait.</div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Hybrid ML Classification</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Trust Score (0-100)</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Rule-Based Detection</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report View -->
+        <section class="view hidden" id="view-report">
+            <div class="header-action">
+                <button class="btn btn-outline" onclick="showView('home')">&larr; New Scan</button>
+                <h2>Scan Report</h2>
+            </div>
+            <div id="report-content" class="report-content">
+                <!-- Javascript will inject the report UI here -->
+            </div>
+        </section>
+
+        <!-- History View -->
+        <section class="view hidden" id="view-history">
+            <div class="header-action">
+                <h2>Scan History</h2>
+            </div>
+            <div id="history-list" class="history-list">
+                <!-- Javascript will inject history UI here -->
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+    
+    <!-- Chart.js for stats -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/scanner.js"></script>
+    <script src="js/report.js"></script>
+</body>
+</html>

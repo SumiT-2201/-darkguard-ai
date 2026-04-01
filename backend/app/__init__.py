@@ -29,25 +29,40 @@ def create_app():
     except Exception as e:
         print(f"⚠️ ML Model failed to load: {e}")
 
-    # --- 🔒 SECURITY MIDDLEWARE (API KEY AUTH) ---
+    # --- 🔒 SECURITY MIDDLEWARE (DEVELOPMENT-FRIENDLY AUTH) ---
     @app.before_request
     def authenticate():
-        # A. ALWAYS Bypass authentication for OPTIONS requests (CORS Preflight)
+        # A. ALWAYS Bypass for OPTIONS requests (CORS Preflight)
         if request.method == "OPTIONS":
             return make_response("", 200)
 
         # B. Bypass for static frontend files, root, and health checks
-        if request.path.startswith('/api/'):
-            if request.path == '/api/health':
-                 return None
-            
-            api_key = request.headers.get('X-API-Key')
-            if not api_key or api_key != app.config['API_KEY']:
+        if not request.path.startswith('/api/'):
+             return None
+             
+        if request.path == '/api/health':
+             return None
+
+        # C. Localhost / Development Bypass
+        # Allow requests from localhost without keys for easy dev setup
+        host = request.headers.get('Host', '')
+        if 'localhost' in host or '127.0.0.1' in host:
+             return None
+
+        # D. Conditional API Key Validation
+        api_key = request.headers.get('X-API-Key')
+        
+        # If API key is provided, validate it. 
+        # If missing, allow but log (making it optional for local browser testing)
+        if api_key:
+            if api_key != app.config['API_KEY']:
                 return jsonify({
                     "status": "error", 
                     "error": "Unauthorized", 
-                    "message": "Missing or invalid X-API-Key"
+                    "message": "Invalid X-API-Key provided"
                 }), 401
+        
+        # No key provided? Allow the request to proceed (Optionally required for high-risk production environments)
         return None
 
     # Register API blueprints

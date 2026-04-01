@@ -206,3 +206,153 @@ text,label
 "Standard shipping is $5.00",safe
 "Cancel your subscription anytime online",safe
 "We respect your privacy",safe
+"25 other people are looking at this item right now.",social_proof
+"Over 1,000 customers have purchased this in the last 24 hours.",social_proof
+"Trending now: 50 people have this in their cart.",social_proof
+"John D. from New York just bought a Premium Membership.",social_proof
+"Hot item! 15 people are currently viewing this deal.",social_proof
+"Join 5,000+ happy users who already upgraded today.",social_proof
+"Rated 4.9/5 by 2,000+ verified purchasers this month.",social_proof
+"Be like the 100 people who just unlocked this special offer.",social_proof
+"Top seller! This product is a fan favorite in your area.",social_proof
+"Currently being viewed by users in Seattle and Chicago.",social_proof
+"150 people have bookmarked this for later checkout.",social_proof
+"Our most popular choice for recurring subscribers.",social_proof
+"Don't miss out on what everyone else is buying today.",social_proof
+"Over 50 people added this to their wishlist in the last hour.",social_proof
+"Voted #1 by our community of 10,000+ active members.",social_proof
+"Selling fast! 12 items were sold in the last 30 minutes.",social_proof
+"Most sought after: This item has 5 active bids right now.",social_proof
+"Trusted by 500+ businesses in your industry.",social_proof
+"Join the 30% of users who chose the 'Best Value' plan.",social_proof
+"Recently purchased by a customer in San Francisco.",social_proof
+"This is a trending product with 40% more views today.",social_proof
+"50 people are waiting in line for this limited release.",social_proof
+"See why 1,500 people gave this a 5-star review.",social_proof
+"Everyone is talking about this new arrival!",social_proof
+"9 out of 10 customers recommend this to a friend.",social_proof
+"35 people have this item in their saved for later list.",social_proof
+"A customer in Berlin just saved $20 with this coupon.",social_proof
+"Most popular: This color is currently out of stock for others.",social_proof
+"Verified! This deal was claimed 80 times this morning.",social_proof
+"Join the thousands who already secured their spot.",social_proof
+"Your subscription will automatically continue unless cancelled.",auto_renewal
+"Auto-renews at the standard rate of $19.99/month.",auto_renewal
+"By clicking 'Agree', you enroll in our auto-renewal program.",auto_renewal
+"Subscription continues indefinitely until you manually opt-out.",auto_renewal
+"Your plan will be automatically upgraded and billed next month.",auto_renewal
+"Billed annually at $144 unless you cancel by the renewal date.",auto_renewal
+"You will be charged automatically upon the end of your trial.",auto_renewal
+"Membership automatically renews for another year on expiry.",auto_renewal
+"Continuous service: we will bill your saved card every 30 days.",auto_renewal
+"By signing up, you agree to recurring monthly charges.",auto_renewal
+"Auto-bill is enabled by default for your convenience.",auto_renewal
+"Your account will be debited automatically on the first of each month.",auto_renewal
+"Maintenance fees will auto-renew every quarter at the current rate.",auto_renewal
+"Unlock premium features with a plan that auto-renews for you.",auto_renewal
+"Keep your access alive with automatic billing every week.",auto_renewal
+"By proceeding, you authorize us to bill your card on every renewal.",auto_renewal
+"Standard billing cycles apply: auto-renewal occurs every year.",auto_renewal
+"Your trial will roll into a paid subscription automatically.",auto_renewal
+"Subscription price may increase on auto-renewal date.",auto_renewal
+"Terms of auto-renewal apply: charges appear as 'Digital Service'.",auto_renewal
+"Automatic extension of services will occur every 6 months.",auto_renewal
+"By using this service, you consent to automatic recurring billing.",auto_renewal
+"Don't worry about payments: we'll auto-renew your plan for you.",auto_renewal
+"Your credit card will be charged for the next period automatically.",auto_renewal
+"Recurring billing is required to participate in this offer.",auto_renewal
+"Auto-renewal is a condition of the 50% discount rate.",auto_renewal
+"Your pass will auto-renew at the then-current market price.",auto_renewal
+"Monthly billing will continue until you contact support to stop.",auto_renewal
+"By accepting, you agree to be billed $5 every Monday.",auto_renewal
+"Automatic subscription service is active upon checkout completion.",auto_renewal
+"Subscribe to our newsletter to see the hidden discount code.",forced_action
+"Create an account to continue reading this exclusive story.",forced_action
+"Sign up now to access the full features of this tool.",forced_action
+"You must allow notifications to proceed to the checkout page.",forced_action
+"Connect your Facebook account to unlock your free gift.",forced_action
+"Follow us on TikTok to enter our weekly giveaway.",forced_action
+"Input your mobile number to verify your identity and continue.",forced_action
+"You must accept all tracking cookies to use our search engine.",forced_action
+"Disable your ad-blocker to view the content on this page.",forced_action
+"Share this link with 5 friends to reveal the coupon code.",forced_action
+"You must download our mobile app to view your order history.",forced_action
+"Sign in with Google to download your results as a PDF.",forced_action
+"Please provide your mailing address to see our digital map.",forced_action
+"You must leave a 5-star rating to unlock the premium level.",forced_action
+"Link your bank account to see your real-time balance.",forced_action
+"Provide your date of birth to access the shopping gallery.",forced_action
+"You must agree to our marketing partners' terms to proceed.",forced_action
+"Upload your contacts to find friends and start chatting.",forced_action
+"Verify your email address now to prevent account suspension.",forced_action
+"You must buy at least 2 items to apply any coupon code.",forced_action
+"Subscribe to our VIP club to close this overlay permanently.",forced_action
+"Please fill out this 10-minute survey to get your report.",forced_action
+"You must add a secondary payment method to stay active.",forced_action
+"Allow location access to browse our local inventory list.",forced_action
+"You must enable push notifications to receive your receipt.",forced_action
+"Enter your Social Security Number to verify your forum profile.",forced_action
+"You must have a paid account to delete your user data.",forced_action
+"Follow all our social media channels to get the secret code.",forced_action
+"You must accept third-party tracking to buy this product.",forced_action
+"Submit your professional email to reveal the final price.",forced_action
+"Flash sale! Get 75% off if you order in the next 10 minutes.",urgency
+"Hurry! This exclusive offer expires in exactly 03:45.",urgency
+"Only 2 items left! Buy now before the stock runs out.",urgency
+"Act fast! Price will increase by $20 after the countdown.",urgency
+"Seconds to go! Don't miss your chance for a free upgrade.",urgency
+"Limited time only: This deal is gone forever at midnight.",urgency
+"Hurry up! 5 people are checking out this same item right now.",urgency
+"Last chance! This is the lowest price we will ever offer.",urgency
+"Sale ends today! Don't let this huge discount slip away.",urgency
+"Buy within the next 2 minutes for guaranteed same-day shipping.",urgency
+"Your 50% discount coupon is about to expire. Use it now!",urgency
+"Only 5 slots left for the early bird registration bonus.",urgency
+"Hurry! 100 people just claimed this offer in the last hour.",urgency
+"Limited stock! Once it's gone, it's gone for good.",urgency
+"Act now to secure your spot in our exclusive webinar.",urgency
+"Seconds are ticking! Click here to claim your reward.",urgency
+"Final hours! Everything must go before we close the sale.",urgency
+"Don't wait! This trending item is selling out in minutes.",urgency
+"Hurry up and save! Prices go back to normal at 1:00 PM.",urgency
+"Only 1 unique item left at this special clearance price.",urgency
+"Limited release: Sale ends as soon as the timer hits zero.",urgency
+"Hurry! This is a one-time offer for our new members only.",urgency
+"Get it now! Stock is extremely low for your size and color.",urgency
+"Seconds left to unlock your 20% off welcome bonus.",urgency
+"Hurry! 15 other users are bidding on this item right now.",urgency
+"Don't miss the boat! This deal will never be repeated.",urgency
+"Last few hours to get a free gift with every purchase.",urgency
+"Act fast! We have only 10 units left in our warehouse.",urgency
+"Hurry! Over 1,000 customers have this in their wishlist.",urgency
+"Only 5 rooms remaining at this hotel for your chosen dates.",urgency
+"Subscribe to our newsletter for occasional updates (optional).",safe
+"Your subscription will automatically renew unless you cancel.",safe
+"Login to your account to access your personal dashboard.",safe
+"Search for products, brands, and categories on our site.",safe
+"Copyright 2024. All rights reserved by our company.",safe
+"Contact our support team for any help or questions.",safe
+"Standard shipping is $5.00 for all orders in your region.",safe
+"Read more about our terms of service and privacy policy.",safe
+"This item is currently in stock and ready to ship.",safe
+"Cancel your membership anytime easily from your settings.",safe
+"We respect your privacy and do not sell your personal data.",safe
+"Language selection: English (US), Spanish, French available.",safe
+"Select your size using our comprehensive guide below.",safe
+"Size chart: Small (36-38), Medium (40-42), Large (44-46).",safe
+"Please confirm your email address to secure your account.",safe
+"Your session will timeout in 10 minutes for your security.",safe
+"Manage your notification preferences in your profile settings.",safe
+"Standard processing time for all orders is 1-2 business days.",safe
+"Free returns within 30 days of purchase for any reason.",safe
+"Size and color options are available for this specific item.",safe
+"Help Center: Frequently asked questions and support guides.",safe
+"Site map: Unified navigation for all pages and categories.",safe
+"Privacy: You have the right to request your data at any time.",safe
+"Follow us on social media for news and special updates.",safe
+"Standard taxes and fees are already included in the price.",safe
+"Your password must be at least 8 characters long to proceed.",safe
+"Reset your password via a secure link sent to your email.",safe
+"Enter your coupon code at the final step of checkout.",safe
+"Product specifications: Material: 100% Cotton, Made in USA.",safe
+"Standard delivery time estimates are shown at the checkout.",safe

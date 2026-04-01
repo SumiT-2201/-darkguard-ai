@@ -35,13 +35,25 @@
         .header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 0.75rem;
         }
 
+        .logo-wrap { display: flex; align-items: center; gap: 0.5rem; }
         .logo { font-size: 1.5rem; }
         .title { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; }
+
+        #settings-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        #settings-toggle:hover { color: var(--text); }
 
         .scan-action {
             display: flex;
@@ -67,6 +79,57 @@
 
         #scan-btn:hover { background: #5a4bcf; }
         #scan-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Settings Panel */
+        #settings-panel {
+            display: none;
+            background: var(--secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-header {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .slider-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .reset-btn {
+            margin-top: 0.75rem;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-dim);
+            padding: 0.35rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .reset-btn:hover { color: var(--text); border-color: var(--text-dim); }
 
         .loading {
             display: none;
@@ -138,8 +201,24 @@
 <body>
     <div class="container">
         <div class="header">
-            <span class="logo">🛡️</span>
-            <span class="title">DarkGuard ML</span>
+            <div class="logo-wrap">
+                <span class="logo">🛡️</span>
+                <span class="title">DarkGuard ML</span>
+            </div>
+            <button id="settings-toggle" title="Settings">⚙️</button>
+        </div>
+
+        <!-- Settings Panel -->
+        <div id="settings-panel">
+            <span class="settings-header">Detection Tuning</span>
+            <div class="slider-wrap">
+                <div class="slider-labels">
+                    <span>Confidence Threshold</span>
+                    <span id="threshold-val" style="color: var(--accent); font-weight: bold;">0.80</span>
+                </div>
+                <input type="range" id="threshold-slider" min="0.5" max="1.0" step="0.05" value="0.8">
+                <button id="reset-threshold" class="reset-btn">Reset to default (0.80)</button>
+            </div>
         </div>
 
         <div class="scan-action">

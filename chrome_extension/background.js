@@ -10,11 +10,30 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ url: request.url })
+            body: JSON.stringify({ 
+                url: request.url,
+                threshold: request.threshold || 0.8 
+            })
         })
         .then(response => response.json())
-        .then(data => sendResponse(data))
-        .catch(error => sendResponse({ status: "error", message: error.toString() }));
+        .then(data => {
+            // Forward the result back to the popup AND to the content script for highlighting
+            if (data.status === 'success') {
+                chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+                    if (tabs[0]) {
+                        chrome.tabs.sendMessage(tabs[0].id, {
+                            type: "HIGHLIGHT_PATTERNS",
+                            findings: data.report.findings_list
+                        });
+                    }
+                });
+            }
+            sendResponse(data);
+        })
+        .catch(error => {
+            console.error("Fetch Error:", error);
+            sendResponse({ status: "error", message: error.toString() });
+        });
         
         return true; // Keep message port open for async
     }

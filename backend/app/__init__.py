@@ -1,6 +1,6 @@
 import os
 import sys
-from flask import Flask, send_from_directory, jsonify, request
+from flask import Flask, send_from_directory, jsonify, request, make_response
 from flask_cors import CORS
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
@@ -8,7 +8,6 @@ from app.config import Config
 
 def create_app():
     # 1. Resolve Root Frontend path for static serving
-    # Structure: backend/app/__init__.py -> backend -> root -> frontend
     current_dir = os.path.dirname(os.path.abspath(__file__))
     root_dir = os.path.dirname(os.path.dirname(current_dir))
     frontend_dir = os.path.join(root_dir, 'frontend')
@@ -16,8 +15,8 @@ def create_app():
     app = Flask(__name__, static_folder=frontend_dir, static_url_path='')
     app.config.from_object(Config)
 
-    # Enable CORS for cross-origin requests (Extension)
-    CORS(app)
+    # Enable CORS globally for all origins and headers (fix for extension and dashboard)
+    CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
     # Initialize DB (MongoDB)
     from app.services.mongo_service import MongoService
@@ -28,14 +27,16 @@ def create_app():
         from app.services.ml_detector import MLDetector
         MLDetector.load_model()
     except Exception as e:
-        print(f"⚠️ ML Model failed to load (run training first!): {e}")
+        print(f"⚠️ ML Model failed to load: {e}")
 
     # --- 🔒 SECURITY MIDDLEWARE (API KEY AUTH) ---
     @app.before_request
     def authenticate():
-        # Bypass authentication for:
-        # 1. Static frontend files and root dashboard
-        # 2. Health check route
+        # A. ALWAYS Bypass authentication for OPTIONS requests (CORS Preflight)
+        if request.method == "OPTIONS":
+            return make_response("", 200)
+
+        # B. Bypass for static frontend files, root, and health checks
         if request.path.startswith('/api/'):
             if request.path == '/api/health':
                  return None

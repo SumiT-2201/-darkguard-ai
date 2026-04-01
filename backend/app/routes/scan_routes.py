@@ -6,8 +6,12 @@ from app.services.report_generator import ReportGenerator
 
 scan_bp = Blueprint('scan_bp', __name__)
 
-@scan_bp.route('/scan', methods=['POST'])
+@scan_bp.route('/scan', methods=['POST', 'OPTIONS'])
 def run_scan():
+    # CORS Preflight handler - already handled by before_request but added for route robustness
+    if request.method == 'OPTIONS':
+        return jsonify({"status": "success"}), 200
+
     data = request.get_json()
     if not data or 'url' not in data:
         return jsonify({"status": "error", "message": "URL is required"}), 400
@@ -53,8 +57,10 @@ def run_scan():
         traceback.print_exc()
         return jsonify({"status": "error", "message": f"Server processing error: {str(e)}"}), 500
 
-@scan_bp.route('/test', methods=['GET'])
+@scan_bp.route('/test', methods=['GET', 'OPTIONS'])
 def test_backend():
+    if request.method == 'OPTIONS':
+        return jsonify({"status": "success"}), 200
     return jsonify({
         "status": "success",
         "message": "Backend is running"

@@ -1,10 +1,13 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, current_app, request
 from bson.objectid import ObjectId
 
 report_bp = Blueprint('report_bp', __name__)
 
-@report_bp.route('/history', methods=['GET'])
+@report_bp.route('/history', methods=['GET', 'OPTIONS'])
 def get_history():
+    if request.method == 'OPTIONS':
+        return jsonify({"status": "success"}), 200
+        
     if not hasattr(current_app, 'db') or current_app.db is None:
         return jsonify({"status": "error", "message": "Database not configured"})
         
@@ -14,8 +17,11 @@ def get_history():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
-@report_bp.route('/report/<report_id>', methods=['GET'])
+@report_bp.route('/report/<report_id>', methods=['GET', 'OPTIONS'])
 def get_report(report_id):
+    if request.method == 'OPTIONS':
+        return jsonify({"status": "success"}), 200
+        
     if not hasattr(current_app, 'db') or current_app.db is None:
         return jsonify({"status": "error", "message": "Backend database not configured"})
         

@@ -1,42 +1,49 @@
 {
-    "Total Samples": 206,
-    "True Positives (TP)": 153,
-    "True Negatives (TN)": 46,
-    "False Positives (FP)": 0,
-    "False Negatives (FN)": 7,
-    "Precision": 1.0,
-    "Recall": 0.9563,
-    "FP_Cases": [],
+    "Total Samples": 356,
+    "True Positives (TP)": 272,
+    "True Negatives (TN)": 75,
+    "False Positives (FP)": 1,
+    "False Negatives (FN)": 8,
+    "Precision": 0.9963,
+    "Recall": 0.9714,
+    "Threshold_Used": 0.75,
+    "FP_Cases": [
+        {
+            "text": "Create an account",
+            "pred": "forced_action",
+            "conf": 0.89
+        }
+    ],
     "FN_Cases": [
         {
-            "text": "Sign up for our newsletter to view this article.",
-            "actual": "forced_action",
-            "conf": 0.59,
-            "pred": "forced_action"
+            "text": "45 people are looking at this right now.",
+            "actual": "urgency",
+            "conf": 0.53,
+            "pred": "urgency"
         },
         {
-            "text": "Follow us on Instagram to enter the giveaway.",
-            "actual": "forced_action",
+            "text": "Over 500 people viewing this deal",
+            "actual": "urgency",
+            "conf": 0.67,
+            "pred": "urgency"
+        },
+        {
+            "text": "25 other people are looking at this item right now.",
+            "actual": "social_proof",
+            "conf": 0.52,
+            "pred": "urgency"
+        },
+        {
+            "text": "Over 1,000 customers have purchased this in the last 24 hours.",
+            "actual": "social_proof",
             "conf": 0.65,
-            "pred": "forced_action"
+            "pred": "social_proof"
         },
         {
-            "text": "You must agree to our terms and conditions to read the blog.",
-            "actual": "forced_action",
-            "conf": 0.65,
-            "pred": "forced_action"
-        },
-        {
-            "text": "Subscribe to notifications to close this popup.",
-            "actual": "forced_action",
-            "conf": 0.69,
-            "pred": "forced_action"
-        },
-        {
-            "text": "To unsubscribe, please call our customer service line.",
-            "actual": "forced_action",
-            "conf": 0.65,
-            "pred": "forced_action"
+            "text": "John D. from New York just bought a Premium Membership.",
+            "actual": "social_proof",
+            "conf": 0.64,
+            "pred": "social_proof"
         }
     ]
 }

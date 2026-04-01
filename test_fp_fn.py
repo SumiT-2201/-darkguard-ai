@@ -6,17 +6,16 @@ import nltk
 import re
 import string
 
-# Setup environment to import app modules if needed
+# Setup environment to import app modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'backend')))
 
 from app.config import Config
 
-# Simplified extraction for testing
+# Local text cleaning specifically for evaluation parity
 def clean_text(text):
     if not isinstance(text, str): return ""
     text = text.lower().translate(str.maketrans('', '', string.punctuation))
     text = re.sub(r'\d+', '', text)
-    # Define a basic STOP_WORDS set as in eval_isolated.py if not using nltk
     STOP_WORDS = {"i", "me", "my", "we", "our", "you", "your", "he", "him", "she", "her", "it", "they", "them"}
     words = text.split()
     return " ".join([w for w in words if w not in STOP_WORDS])
@@ -67,9 +66,9 @@ def run_evaluation():
         else:
             pred_label = str(pred_idx).lower()
 
-        # Detection logic as per ml_detector.py (threshold = 0.7)
+        # --- REPLACED HARDCODED 0.7 WITH GLOBAL CONFIG ---
         is_dark_pattern_actual = actual != 'safe'
-        is_dark_pattern_pred = (pred_label != 'safe') and (prob >= 0.7)
+        is_dark_pattern_pred = (pred_label != 'safe') and (prob >= Config.CONFIDENCE_THRESHOLD)
 
         if is_dark_pattern_actual and is_dark_pattern_pred:
             tp += 1
@@ -90,6 +89,7 @@ def run_evaluation():
         "False Negatives (FN)": fn,
         "Precision": round(tp / (tp + fp), 4) if (tp + fp) > 0 else 0,
         "Recall": round(tp / (tp + fn), 4) if (tp + fn) > 0 else 0,
+        "Threshold_Used": Config.CONFIDENCE_THRESHOLD,
         "FP_Cases": [{"text": t, "pred": p, "conf": round(c, 2)} for t, p, c in fp_cases[:5]],
         "FN_Cases": [{"text": t, "actual": a, "conf": round(c, 2), "pred": p} for t, a, c, p in fn_cases[:5]]
     }
@@ -97,7 +97,7 @@ def run_evaluation():
     import json
     with open('eval_metrics.json', 'w') as f:
         json.dump(results_summary, f, indent=4)
-    print("Done. Metrics saved to eval_metrics.json")
+    print(f"Done. Metrics saved to eval_metrics.json using threshold {Config.CONFIDENCE_THRESHOLD}")
 
 if __name__ == '__main__':
     run_evaluation()

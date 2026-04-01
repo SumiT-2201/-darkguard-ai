@@ -72,12 +72,12 @@ class MLDetector:
             if any(exc in sent_lower for exc in cls.EXCLUSION_LIST):
                 continue
             
-            # B. NEW MINIMUM PHRASE LENGTH (>5 words)
+            # B. MINIMUM PHRASE LENGTH (>5 words)
             if word_count <= 5:
                 continue
             
-            # C. USE IMPROVED 0.8 THRESHOLD
-            if category.lower() in ['not_dark_pattern', 'none', 'safe'] or max_prob < 0.8:
+            # C. USE GLOBAL CONFIDENCE THRESHOLD
+            if category.lower() in ['not_dark_pattern', 'none', 'safe'] or max_prob < Config.CONFIDENCE_THRESHOLD:
                 continue
             
             # Limit duplicates for each category

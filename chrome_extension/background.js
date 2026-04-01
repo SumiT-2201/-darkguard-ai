@@ -10,21 +10,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 url: request.url,
                 threshold: request.threshold || 0.8  // Use passed threshold or default
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Scan Result:", data);
-            sendResponse(data);
-        })
-        .catch(error => {
-            console.error("Fetch Error:", error);
-            sendResponse({ status: "error", message: error.toString() });
-        });
-        
+            .then(response => response.json())
+            .then(data => {
+                console.log("Scan Result:", data);
+                sendResponse(data);
+            })
+            .catch(error => {
+                console.error("Fetch Error:", error);
+                sendResponse({ status: "error", message: error.toString() });
+            });
+
         return true; // Keep message port open for async
     }
 });

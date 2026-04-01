@@ -11,18 +11,24 @@ const gradeDiv = document.getElementById('grade');
 // Settings Elements
 const settingsToggle = document.getElementById('settings-toggle');
 const settingsPanel = document.getElementById('settings-panel');
+const apiKeyInput = document.getElementById('api-key-input');
 const thresholdSlider = document.getElementById('threshold-slider');
 const thresholdVal = document.getElementById('threshold-val');
-const resetBtn = document.getElementById('reset-threshold');
+const resetBtn = document.getElementById('reset-settings');
 
 let currentThreshold = 0.8;
+let currentApiKey = "";
 
 // --- INITIALIZE SETTINGS ---
-chrome.storage.sync.get(['confidence_threshold'], (data) => {
+chrome.storage.sync.get(['confidence_threshold', 'darkguard_api_key'], (data) => {
     if (data.confidence_threshold) {
         currentThreshold = data.confidence_threshold;
         thresholdSlider.value = currentThreshold;
         thresholdVal.textContent = parseFloat(currentThreshold).toFixed(2);
+    }
+    if (data.darkguard_api_key) {
+        currentApiKey = data.darkguard_api_key;
+        apiKeyInput.value = currentApiKey;
     }
 });
 
@@ -39,20 +45,36 @@ thresholdSlider.addEventListener('input', (e) => {
     chrome.storage.sync.set({ confidence_threshold: currentThreshold });
 });
 
+apiKeyInput.addEventListener('change', (e) => {
+    currentApiKey = e.target.value.trim();
+    chrome.storage.sync.set({ darkguard_api_key: currentApiKey });
+});
+
 resetBtn.addEventListener('click', () => {
     currentThreshold = 0.8;
+    currentApiKey = "";
     thresholdSlider.value = 0.8;
+    apiKeyInput.value = "";
     thresholdVal.textContent = '0.80';
-    chrome.storage.sync.set({ confidence_threshold: 0.8 });
+    chrome.storage.sync.set({ confidence_threshold: 0.8, darkguard_api_key: "" });
 });
 
 // --- SCAN LOGIC ---
 btn.addEventListener('click', () => {
+    // Basic validation
+    if (!currentApiKey) {
+        settingsPanel.style.display = 'block';
+        settingsToggle.textContent = '❌';
+        apiKeyInput.focus();
+        showError("Please set your API Key in settings first.");
+        return;
+    }
+
     btn.disabled = true;
     loading.style.display = 'block';
     resultDiv.style.display = 'none';
     errorMsg.style.display = 'none';
-    settingsPanel.style.display = 'none'; // Auto-hide settings on scan
+    settingsPanel.style.display = 'none';
     settingsToggle.textContent = '⚙️';
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -69,24 +91,24 @@ btn.addEventListener('click', () => {
             return;
         }
 
-        // Pass threshold to background script
         chrome.runtime.sendMessage({ 
             type: "SCAN_CURRENT_PAGE", 
             url: url,
-            threshold: currentThreshold 
+            threshold: currentThreshold,
+            apiKey: currentApiKey
         }, response => {
             loading.style.display = 'none';
             btn.disabled = false;
 
             if (chrome.runtime.lastError || !response) {
-                showError("Backend server is down or unreachable.");
+                showError("Backend server is unreachable.");
                 return;
             }
 
             if (response.status === 'success') {
                 renderResult(response.report);
             } else {
-                showError("Scan Failed: " + (response.message || "Unknown error"));
+                showError("Scan Failed: " + (response.message || response.error || "Unknown error"));
             }
         });
     });
@@ -127,7 +149,7 @@ function renderResult(report) {
                            patterns.map(p => `• ${p.pattern_name}`).slice(0, 3).join('<br>') + 
                            (patterns.length > 3 ? `<br>...and ${patterns.length - 3} more` : '');
     } else {
-        findingsDiv.innerHTML = '<span style="color:#00b894">✅ Safe from dark patterns!</span>';
+        findingsDiv.innerHTML = '<span style="color:#00b894">✅ Safe! No patterns found.</span>';
     }
 
     resultDiv.style.display = 'block';

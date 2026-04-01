@@ -195,7 +195,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python run.py
 ```
-*Make sure you have a `MONGO_URI` and optional `CLAUDE_API_KEY` configured in `app/config.py`.*
+*Note: On the first run, the backend will generate a unique **DARKGUARD_API_KEY** in your `.env` file. You will need this for the Chrome extension.*
 
 ### 2. Frontend Setup
 ```bash
@@ -204,6 +204,17 @@ cd frontend
 npx live-server
 ```
 *Frontend runs by default on `http://127.0.0.1:8080` (ensure backend is on port 5000).*
+
+---
+
+## 🧩 Extension Configuration & Auth
+
+1. Open Google Chrome and navigate to `chrome://extensions/`.
+2. Toggle **Developer mode** on and click **Load unpacked** (Select the `chrome_extension/` folder).
+3. Open the extension popup, click the **⚙️ Settings icon**, and:
+   -   **Enter your API Key**: Copy this from the `backend/.env` file.
+   -   **Adjust Sensitivity**: Use the slider to set your preferred detection threshold (0.80 recommended).
+   -   **Save**: Changes are automatically saved to your Chrome profile.
 
 ---
 

@@ -87,28 +87,42 @@
             border-radius: 8px;
             padding: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.2s;
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .settings-header {
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-dim);
             text-transform: uppercase;
             margin-bottom: 0.75rem;
             display: block;
         }
 
-        .slider-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .input-group {
+             margin-bottom: 1rem;
+             display: flex;
+             flex-direction: column;
+             gap: 0.5rem;
         }
 
-        .slider-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-dim);
+        .label-row {
+             display: flex;
+             justify-content: space-between;
+             font-size: 0.8rem;
+             color: var(--text-dim);
+        }
+
+        input[type=text], input[type=password] {
+             background: rgba(0,0,0,0.3);
+             border: 1px solid rgba(255,255,255,0.1);
+             color: white;
+             padding: 0.5rem;
+             border-radius: 4px;
+             font-size: 0.8rem;
+             outline: none;
         }
 
         input[type=range] {
@@ -118,7 +132,7 @@
         }
 
         .reset-btn {
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             background: none;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-dim);
@@ -210,14 +224,22 @@
 
         <!-- Settings Panel -->
         <div id="settings-panel">
+            <span class="settings-header">Account Configuration</span>
+            <div class="input-group">
+                 <div class="label-row">
+                      <span>Backend API Key</span>
+                 </div>
+                 <input type="password" id="api-key-input" placeholder="Enter your secret key...">
+            </div>
+
             <span class="settings-header">Detection Tuning</span>
-            <div class="slider-wrap">
-                <div class="slider-labels">
+            <div class="input-group">
+                <div class="label-row">
                     <span>Confidence Threshold</span>
                     <span id="threshold-val" style="color: var(--accent); font-weight: bold;">0.80</span>
                 </div>
                 <input type="range" id="threshold-slider" min="0.5" max="1.0" step="0.05" value="0.8">
-                <button id="reset-threshold" class="reset-btn">Reset to default (0.80)</button>
+                <button id="reset-settings" class="reset-btn">Reset to factory defaults</button>
             </div>
         </div>
 

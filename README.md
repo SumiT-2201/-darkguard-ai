@@ -117,3 +117,10 @@ npx live-server
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 Crafted with ❤️ by the DarkGuard AI Team.
+
+---
+
+## 🔄 Latest Update
+- Improved backend stability and fixed API communication issues
+- Optimized request handling and error responses
+- System is now fully functional for scanning and reporting
